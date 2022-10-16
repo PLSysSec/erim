@@ -1,6 +1,0 @@
-.tmp*
-.tem*
-Module*
-modules*
-tem_lsm.mod.c
-tem_lsm.ko
