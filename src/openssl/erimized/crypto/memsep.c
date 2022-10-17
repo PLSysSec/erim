@@ -25,7 +25,7 @@
 int erim_memsep_init() {
 
   erim_init(MB2048, ERIM_FLAG_ISOLATE_TRUSTED | ERIM_FLAG_INTEGRITY_ONLY);
-  erim_memScan(NULL, NULL, ERIM_UNTRUSTED_PKRU);
+  // erim_memScan(NULL, NULL, ERIM_UNTRUSTED_PKRU);
 
   libtem_lsmSyscall();
   

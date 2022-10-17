@@ -14,6 +14,9 @@ extern "C"
 {
 #endif
 
+#define HFI_EMULATION
+#include "hfi.h"
+
 /*
  * Debug prints
  */
@@ -117,7 +120,60 @@ extern char * ERIM_REGULAR_STACK;
   #define ERIM_SWITCH_TO_UNTRUSTED_STACK 
 #endif
   
+#ifdef HFI_EMULATION
+
+
+#define erim_switch_to_trusted  \
+  do {  \
+    hfi_sandbox sandbox; \
+    memset(&sandbox, 0, sizeof(hfi_sandbox));\
+    sandbox.is_trusted_sandbox = false;\
+    sandbox.data_ranges[0].readable = true;\
+    sandbox.data_ranges[0].writeable = true;\
+    sandbox.data_ranges[0].base_mask = 0;\
+    sandbox.data_ranges[0].ignore_mask = (uint64_t)0xFFFFFFFFFFFFFFFF;\
+    sandbox.code_ranges[0].executable = true;\
+    sandbox.code_ranges[0].base_mask = 0;\
+    sandbox.code_ranges[0].ignore_mask = (uint64_t)0xFFFFFFFFFFFFFFFF;\
+    hfi_set_sandbox_metadata(&sandbox);\
+    asm volatile( \
+      ".rept 0\n" \
+      "xor %%r11, %%r11\n" \
+      ".endr\n"\
+      ::: "r11");\
+    asm volatile("lfence;");\
+    hfi_enter_sandbox();\
+  } while(0)
   
+#define erim_switch_to_untrusted\
+  do {\
+    asm volatile("lfence;");\
+    hfi_exit_sandbox();\
+  } while(0)    
+ 
+  // switch to untrustd based on trusted flags
+#define erim_switch_to_untrusted_flags\
+  do {\
+    erim_switch_to_untrusted;\
+  } while(0)
+
+  // switch to untrustd based on trusted flags
+#define erim_switch_to_trusted_flags\
+  do {\
+    erim_switch_to_trusted;\
+  } while(0)
+
+// Switching between isolated and application
+/*
+ */
+    
+#else
+  
+  
+    // 
+    // // enter sandbox while in a sandbox should fail
+    // hfi_enter_sandbox();
+
 // Switching between isolated and application
 #define erim_switch_to_trusted						\
   do {                                                                  \
@@ -160,7 +216,10 @@ extern char * ERIM_REGULAR_STACK;
     ERIM_DBM("pkru: %s", __rdpkru());					\
     ERIM_INCR_CNT(1);							\
   } while(0)
-  
+
+
+#endif
+
 #define uint8ptr(ptr) ((uint8_t *)ptr)
   
 #define erim_isWRPKRU(ptr)				\

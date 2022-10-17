@@ -1,8 +1,8 @@
 daemon off;
 master_process off;
 
-worker_processes  1;
-worker_cpu_affinity 00000100;
+worker_processes  4;
+worker_cpu_affinity 00001000 00000100 00000010 00000001;
 
 #error_log  logs/error.log;
 #error_log  logs/error.log  notice;
