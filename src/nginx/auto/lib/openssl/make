@@ -52,7 +52,7 @@ $OPENSSL/.openssl/include/openssl/ssl.h:	$NGX_MAKEFILE
 	cd $OPENSSL \\
 	&& if [ -f Makefile ]; then \$(MAKE) clean; fi \\
 	&& ./config --prefix=$ngx_prefix no-shared $OPENSSL_OPT \\
-	&& \$(MAKE) -j40 \\
+	&& \$(MAKE) -j$(nproc) \\
 	&& \$(MAKE) install_sw LIBDIR=lib
 
 END

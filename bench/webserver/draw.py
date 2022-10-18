@@ -20,7 +20,7 @@ def decode_log(filename):
     return (labels, tps)
 
 l1, t1 = decode_log("native.log")
-l2, t2 = decode_log("erimized.log")
+l2, t2 = decode_log("hfi.log")
 
 data = [
     list(np.divide(t1, t1)),
