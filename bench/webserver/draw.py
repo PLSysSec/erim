@@ -22,6 +22,9 @@ def decode_log(filename):
 l1, t1 = decode_log("native.log")
 l2, t2 = decode_log("erimized.log")
 
+print(t1)
+print(t2)
+
 data = [
     list(np.divide(t1, t1)),
     list(np.divide(t2, t1)),        
@@ -30,20 +33,24 @@ data = [
 print(data)
 X = np.arange(len(l1))    
 fig, ax = plt.subplots(ncols=1, nrows=1)
-delta = 0.25
+delta = 0.35
 ax.bar(X, data[0], color = 'g', width = delta, hatch='/')
-ax.bar(X + delta, data[1], color = 'r', width = delta, hatch='-')
+ax.bar(X + delta, data[1], color = 'r', width = delta, hatch='\\')
 
 
-
-# ax.set_ylabel('Leaked bytes percentile')
-ax.legend(labels=['Unprotected', 'HFI'])
-ax.set_xticks(X+delta)
-ax.set_xticklabels(l1)
-
-#     # ax.set_title('Scores by group and gender')
+ax.text(-1.3, 1.08, str("TPS\nNative"), color='black')
     
-#     ax.set_yticks(np.arange(0, 2.5, 0.2))
+
+for i, v in enumerate(t1):
+    ax.text(i-delta, 1.08, str("{:.2f}\n kB/s".format(v/1000)), color='black')
+    
+    
+ax.set_ylabel('Normalized Throughput')
+ax.set_xlabel('File Size')
+ax.legend(labels=['Native', 'HFI'], ncol=2, frameon=False, bbox_to_anchor=(1.01, 1.28))
+ax.set_xticks(X+delta/2)
+ax.set_xticklabels(l1)
+ax.set_yticks(np.arange(0, 1.1, 0.1))
 
     
 fig.tight_layout()
