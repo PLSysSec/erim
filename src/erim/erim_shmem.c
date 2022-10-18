@@ -51,6 +51,16 @@ int erim_shmem_fini() {
   return erim_munmap(ERIM_POOL_LOCATION, erim_shmemSize);
 }
   
+
+void * erim_zalloc(size_t size) {
+  void * ptr = erim_malloc(size);
+  memset(ptr, 0, size);
+  return ptr;
+}
+
+
+#if 0 // We are not using erim or mpk, just using the code to benchmark transitions
+
 void * erim_mallocIsolated(size_t size) {
   ERIM_DBM("allocate isolated memory size %zd", size);
   return sh_malloc(size, ERIM_POOL);
@@ -68,20 +78,23 @@ void * erim_reallocIsolated(void * ptr, size_t size) {
   return sh_realloc(ptr, size, ERIM_POOL);
 }
 
-void * erim_malloc(size_t size) {
+
+
+void erim_freeIsolated(void * ptr) {
+  ERIM_DBM("freed isolated memory at %p", ptr);
+  sh_free(ptr, ERIM_POOL);
+}
+
+
+void erim_free(void * ptr) {
   if(!ERIM_EXEC_DOMAIN(__rdpkru())) {
-    ERIM_DBM("allocate regular memory size %zd", size);
-    return malloc(size);
+    ERIM_DBM("freed regular memory at %p", ptr);
+    free(ptr);
   } else {
-    return erim_mallocIsolated(size);
+    erim_freeIsolated(ptr);
   }
 }
 
-void * erim_zalloc(size_t size) {
-  void * ptr = erim_malloc(size);
-  memset(ptr, 0, size);
-  return ptr;
-}
 
 void * erim_realloc(void* ptr, size_t size) {
   if(!ERIM_EXEC_DOMAIN(__rdpkru())) {
@@ -92,16 +105,48 @@ void * erim_realloc(void* ptr, size_t size) {
   }
 }
 
-void erim_freeIsolated(void * ptr) {
-  ERIM_DBM("freed isolated memory at %p", ptr);
-  sh_free(ptr, ERIM_POOL);
-}
 
-void erim_free(void * ptr) {
+void * erim_malloc(size_t size) {
   if(!ERIM_EXEC_DOMAIN(__rdpkru())) {
-    ERIM_DBM("freed regular memory at %p", ptr);
-    free(ptr);
+    ERIM_DBM("allocate regular memory size %zd", size);
+    return malloc(size);
   } else {
-    erim_freeIsolated(ptr);
+    return erim_mallocIsolated(size);
   }
 }
+
+#else
+
+void * erim_mallocIsolated(size_t size) {
+  return malloc(size);
+}
+
+void * erim_zallocIsolated(size_t size) {
+  void * ptr = malloc(size);
+  memset(ptr, 0, size);
+  return ptr;
+}
+
+void * erim_reallocIsolated(void * ptr, size_t size) {
+  return realloc(ptr, size);
+}
+
+
+void erim_freeIsolated(void * ptr) {
+  free(ptr);
+}
+
+
+void erim_free(void * ptr) {
+    free(ptr);
+}
+
+void * erim_realloc(void* ptr, size_t size) {
+    return realloc(ptr, size);
+}
+
+
+void * erim_malloc(size_t size) {
+    return malloc(size);
+}
+#endif

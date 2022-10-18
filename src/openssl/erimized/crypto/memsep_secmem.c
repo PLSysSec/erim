@@ -20,10 +20,10 @@
 
 #include <string.h>
 
-#define IMPLEMENTED
+// #define IMPLEMENTED
 
 #if defined(OPENSSL_SYS_LINUX) || defined(OPENSSL_SYS_UNIX)
-# define IMPLEMENTED
+// # define IMPLEMENTED
 # include <stdlib.h>
 # include <assert.h>
 # include <unistd.h>
