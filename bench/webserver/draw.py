@@ -49,6 +49,6 @@ ax.set_xticklabels(l1)
 fig.tight_layout()
 fig.set_size_inches(6, 4)
 fig.savefig('nginx.png', dpi=100)
-plt.show()
+# plt.show()
 
 # draw_heatmap()
