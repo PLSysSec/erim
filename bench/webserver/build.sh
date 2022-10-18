@@ -19,7 +19,7 @@ build_nginx() {
     
     ./configure "--prefix=$webbench/nginx-$basename/" --with-file-aio --without-http_rewrite_module --with-http_ssl_module "--with-openssl=$1" --with-ld-opt="$2" --with-cc-opt="-I ../erim/ -D_GNU_SOURCE" #--with-openssl-opt='-d' --with-debug
     
-    make -j40 && make install
+    make -j$(nproc) && make install
     
     cd -
 }

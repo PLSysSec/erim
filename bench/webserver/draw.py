@@ -20,7 +20,7 @@ def decode_log(filename):
     return (labels, tps)
 
 l1, t1 = decode_log("native.log")
-l2, t2 = decode_log("erimized.log")
+l2, t2 = decode_log("hfi.log")
 
 print(t1)
 print(t2)
@@ -56,6 +56,6 @@ ax.set_yticks(np.arange(0, 1.1, 0.1))
 fig.tight_layout()
 fig.set_size_inches(6, 4)
 fig.savefig('nginx.png', dpi=100)
-plt.show()
+# plt.show()
 
 # draw_heatmap()
