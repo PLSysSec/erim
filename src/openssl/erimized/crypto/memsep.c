@@ -24,10 +24,10 @@
 
 int erim_memsep_init() {
 
-  // erim_init(MB2048, ERIM_FLAG_ISOLATE_TRUSTED | ERIM_FLAG_INTEGRITY_ONLY);
+  erim_init(MB2048, ERIM_FLAG_ISOLATE_TRUSTED | ERIM_FLAG_INTEGRITY_ONLY);
   // erim_memScan(NULL, NULL, ERIM_UNTRUSTED_PKRU);
 
-  // libtem_lsmSyscall();
+  libtem_lsmSyscall();
   
   erim_switch_to_untrusted;
   
