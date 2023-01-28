@@ -20,7 +20,7 @@ def decode_log(filename):
     return (labels, tps)
 
 l1, t1 = decode_log("native.log")
-l2, t2 = decode_log("hfi.log")
+l2, t2 = decode_log("erim.log")
 
 print(t1)
 print(t2)
@@ -48,8 +48,8 @@ ax.bar(X + delta, data[1], color = '#2B83BA', width = delta, edgecolor = "black"
 # ax.set_ylabel('Normalized throughput')
 
 ax.set_xlabel('File Size')
-# ax.legend(labels=['Native', 'HFI'], ncol=2, frameon=False, bbox_to_anchor=(1.01, 1.28))
-plt.legend(labels=['Native', 'HFI'], bbox_to_anchor=(1, 1.5), frameon=False, loc='upper right', ncol=2)
+# ax.legend(labels=['Native', 'ERIM'], ncol=2, frameon=False, bbox_to_anchor=(1.01, 1.28))
+plt.legend(labels=['Native', 'ERIM'], bbox_to_anchor=(1, 1.5), frameon=False, loc='upper right', ncol=2)
 ax.set_xticks(X+delta/2)
 ax.set_xticklabels(l1)
 ax.set_yticks(np.arange(0, 1.1, 0.25))
