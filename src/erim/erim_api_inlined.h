@@ -15,8 +15,7 @@ extern "C"
 #endif
 
 #define HFI_EMULATION
-#define HFI_SIM_NOABORT
-#include "../../../hw_isol_gem5/tests/test-progs/hfi/hfi.h"
+#include "hfi.h"
 
 /*
  * Debug prints
