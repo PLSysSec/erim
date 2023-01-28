@@ -29,7 +29,7 @@ int erim_memsep_init() {
 
   // libtem_lsmSyscall();
   
-  // erim_switch_to_untrusted;
+  erim_switch_to_untrusted;
   
   return 1;
 }
