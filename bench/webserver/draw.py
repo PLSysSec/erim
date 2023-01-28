@@ -20,22 +20,26 @@ def decode_log(filename):
     return (labels, tps)
 
 l1, t1 = decode_log("native.log")
-l2, t2 = decode_log("hfi.log")
+l2, t2 = decode_log("erim.log")
+l3, t3 = decode_log("hfi.log")
 
 print(t1)
 print(t2)
+print(t3)
 
 data = [
     list(np.divide(t1, t1)),
     list(np.divide(t2, t1)),
+    list(np.divide(t3, t1)),
 ]
 
 print(data)
 X = np.arange(len(l1))
 fig, ax = plt.subplots(ncols=1, nrows=1)
-delta = 0.35
+delta = 0.25
 ax.bar(X, data[0], color = '#FFFFBF', width = delta, edgecolor = "black")
-ax.bar(X + delta, data[1], color = '#2B83BA', width = delta, edgecolor = "black")
+ax.bar(X + delta, data[1], color = '#D7191C', width = delta, edgecolor = "black")
+ax.bar(X + 2*delta, data[2], color = '#2B83BA', width = delta, edgecolor = "black")
 
 
 # ax.text(-1.3, 1.08, str("TPS\nNative"), color='black')
@@ -49,7 +53,7 @@ ax.bar(X + delta, data[1], color = '#2B83BA', width = delta, edgecolor = "black"
 
 ax.set_xlabel('File Size')
 # ax.legend(labels=['Native', 'HFI'], ncol=2, frameon=False, bbox_to_anchor=(1.01, 1.28))
-plt.legend(labels=['Native', 'HFI'], bbox_to_anchor=(1, 1.5), frameon=False, loc='upper right', ncol=2)
+plt.legend(labels=['Native', 'MPK', 'HFI emulation'], bbox_to_anchor=(1, 1.5), frameon=False, loc='upper right', ncol=3)
 ax.set_xticks(X+delta/2)
 ax.set_xticklabels(l1)
 ax.set_yticks(np.arange(0, 1.1, 0.25))
