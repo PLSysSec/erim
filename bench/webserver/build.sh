@@ -30,5 +30,5 @@ make -s -C ../../src/common
 make -s -C ../../src/erim
 
 
-build_nginx ../openssl/native "../../bin/erim/liberim.a"
+# build_nginx ../openssl/native "../../bin/erim/liberim.a"
 build_nginx ../openssl/erimized "../../bin/erim/liberim.a"
