@@ -53,7 +53,7 @@ ax.bar(X + 2*delta, data[2], color = '#2B83BA', width = delta, edgecolor = "blac
 
 ax.set_xlabel('File Size')
 # ax.legend(labels=['Native', 'HFI'], ncol=2, frameon=False, bbox_to_anchor=(1.01, 1.28))
-plt.legend(labels=['Native', 'MPK', 'HFI emulation'], bbox_to_anchor=(1, 1.5), frameon=False, loc='upper right', ncol=3)
+plt.legend(labels=['Unmodified Nginx', 'MPK', 'HFI emulation'], bbox_to_anchor=(1, 1.5), frameon=False, loc='upper right', ncol=3)
 ax.set_xticks(X+delta/2)
 ax.set_xticklabels(l1)
 ax.set_yticks(np.arange(0, 1.1, 0.25))
