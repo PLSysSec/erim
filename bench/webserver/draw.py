@@ -49,7 +49,7 @@ ax.bar(X + 2*delta, data[2], color = '#2B83BA', width = delta, edgecolor = "blac
 #     ax.text(i-delta, 1.08, str("{:.2f}\n kB/s".format(v/1000)), color='black')
 
 
-# ax.set_ylabel('Normalized throughput')
+ax.set_ylabel('Norm. throughput')
 
 ax.set_xlabel('File Size')
 # ax.legend(labels=['Native', 'HFI'], ncol=2, frameon=False, bbox_to_anchor=(1.01, 1.28))
@@ -59,7 +59,7 @@ ax.set_xticklabels(l1)
 ax.set_yticks(np.arange(0, 1.1, 0.25))
 
 fig.tight_layout(pad=2.5)
-fig.set_size_inches(6, 2)
+fig.set_size_inches(6.2, 2)
 fig.savefig('nginx.pdf', format="pdf", bbox_inches="tight", pad_inches=0)
 # plt.show()
 
