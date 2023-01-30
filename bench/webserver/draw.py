@@ -34,6 +34,17 @@ data = [
 ]
 
 print(data)
+
+with open("data.txt", "w") as txt_file:
+    txt_file.write("Native: " + str(data[0]) + "\n")
+    txt_file.write("Erim: " + str(data[1]) + "\n")
+    txt_file.write("HFI: " + str(data[2]) + "\n")
+    txt_file.write("\n")
+    txt_file.write("Erim min: " + str(min(data[1])) + "\n")
+    txt_file.write("Erim max: " + str(max(data[1])) + "\n")
+    txt_file.write("HFI min: " + str(min(data[2])) + "\n")
+    txt_file.write("HFI max: " + str(max(data[2])) + "\n")
+
 X = np.arange(len(l1))
 fig, ax = plt.subplots(ncols=1, nrows=1)
 delta = 0.25
