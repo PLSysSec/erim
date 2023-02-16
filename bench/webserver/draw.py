@@ -45,6 +45,10 @@ with open("data.txt", "w") as txt_file:
     txt_file.write("HFI min: " + str(min(data[2])) + "\n")
     txt_file.write("HFI max: " + str(max(data[2])) + "\n")
 
+plt.rcParams['pdf.fonttype'] = 42 # true type font
+# plt.rcParams['font.family'] = 'Linux Libertine'
+plt.rcParams['font.size'] = '7'
+
 X = np.arange(len(l1))
 fig, ax = plt.subplots(ncols=1, nrows=1)
 delta = 0.25
