@@ -47,7 +47,7 @@ with open("data.txt", "w") as txt_file:
 
 plt.rcParams['pdf.fonttype'] = 42 # true type font
 # plt.rcParams['font.family'] = 'Linux Libertine'
-plt.rcParams['font.size'] = '7'
+plt.rcParams['font.size'] = '11'
 
 X = np.arange(len(l1))
 fig, ax = plt.subplots(ncols=1, nrows=1)
@@ -74,7 +74,7 @@ ax.set_xticklabels(l1)
 ax.set_yticks(np.arange(0, 1.1, 0.25))
 
 fig.tight_layout(pad=2.5)
-fig.set_size_inches(6.2, 2)
+fig.set_size_inches(6.2, 2.1)
 fig.savefig('nginx.pdf', format="pdf", bbox_inches="tight", pad_inches=0)
 # plt.show()
 
